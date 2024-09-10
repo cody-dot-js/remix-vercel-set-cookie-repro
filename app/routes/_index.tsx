@@ -1,5 +1,5 @@
-import { unstable_data, type MetaFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { json, type MetaFunction } from "@remix-run/node";
+import { Form, redirect } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,7 +15,7 @@ export const loader = async () => {
     ["Set-Cookie", "ccc=loader"],
   ]);
 
-  return unstable_data({
+  return json({
     message: "Hello from Remix!",
   }, {
     headers,
@@ -29,9 +29,7 @@ export const action = async () => {
     ["Set-Cookie", "ccc=action"],
   ]);
 
-  return unstable_data({
-    message: "Hello from Remix!",
-  }, {
+  return redirect("/other", {
     headers,
   });
 }
