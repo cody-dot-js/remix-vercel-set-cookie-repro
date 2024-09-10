@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { unstable_data, type MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -6,6 +6,20 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+
+export const loader = async () => {
+  const headers = new Headers([
+    ["Set-Cookie", "aaa=1"],
+    ["Set-Cookie", "bbb=1"],
+    ["Set-Cookie", "ccc=1"],
+  ]);
+
+  return unstable_data({
+    message: "Hello from Remix!",
+  }, {
+    headers,
+  });
+}
 
 export default function Index() {
   return (
