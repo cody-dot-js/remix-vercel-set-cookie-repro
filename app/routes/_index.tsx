@@ -1,5 +1,5 @@
 import { json, type MetaFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, redirect } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -29,9 +29,7 @@ export const action = async () => {
     ["Set-Cookie", "ccc=action"],
   ]);
 
-  return json({
-    message: "Hello from Remix!",
-  }, {
+  return redirect("/other", {
     headers,
   });
 }
